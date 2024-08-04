@@ -52,4 +52,25 @@ const loginUser = async (req , res)=>{
     }
 }
 
-module.exports = { registerUser ,loginUser };
+const findUser = async (req, res)=>{
+    const userId = req.params.userId
+    try {
+        const user = await userModal.findById(userId)
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
+
+const getUser = async (req, res) => {
+    try {
+        const users = await userModal.find()
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
+
+module.exports = { registerUser ,loginUser , findUser , getUser };
